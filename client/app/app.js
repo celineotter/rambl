@@ -1,15 +1,16 @@
-angular.module('ramblApp', 
-  ['ngRoute', 
-   'ramblApp.authServices', 
+angular.module('ramblApp',
+  ['ngRoute',
+  // pass in new files:
+   'ramblApp.authServices',
    'ramblApp.easyRTCServices',
    'ramblApp.interviewServices',
    'ramblApp.home',
    'ramblApp.signup',
    'ramblApp.about',
-   'ramblApp.lobby', 
+   'ramblApp.lobby',
    'ramblApp.room'])
 
-.config(['$routeProvider', '$httpProvider', 
+.config(['$routeProvider', '$httpProvider',
   function ($routeProvider, $httpProvider) {
     $routeProvider
       .when('/', {
@@ -28,7 +29,7 @@ angular.module('ramblApp',
         templateUrl: 'app/lobby/lobby.html',
         controller: 'lobbyController'
       })
-      .when('/room', {
+      .when('/room/:newRoom', {
         templateUrl: 'app/room/room.html',
         controller: 'roomController'
       })
@@ -37,6 +38,7 @@ angular.module('ramblApp',
       });
 
       $httpProvider.interceptors.push('AttachTokens');
+      // $locationProvider.html5Mode(true);
 }])
 
 .factory('AttachTokens', ['$window',
@@ -57,11 +59,11 @@ angular.module('ramblApp',
   function($rootScope, $location, $window, Auth) {
 
     $rootScope.$on('$routeChangeStart', function(evt, next, current) {
-      if (next && 
-          next.$$route && 
-          next.$$route.controller && 
-          (next.$$route.controller !== 'homeController' && 
-            next.$$route.controller !== 'signupController' && 
+      if (next &&
+          next.$$route &&
+          next.$$route.controller &&
+          (next.$$route.controller !== 'homeController' &&
+            next.$$route.controller !== 'signupController' &&
             next.$$route.controller !== 'aboutController')) {
         Auth.isAuth()
           .then(function() {
