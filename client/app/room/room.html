@@ -9,7 +9,7 @@
       <li><a ng-click="signout();" href="javascript:void(0);">Sign Out</a></li>
     </ul>
   </div>
-</nav> 
+</nav>
 
 <div class="container main_room_container">
 
@@ -19,17 +19,28 @@
 	  </div>
 	</div>
 
-  <div class="row"> 
+  <div class="row">
     <div class="col-md-12">
-	    <video id="self" width="150" height="100" muted="muted" volume="0"></video>
+
+      <div class="row">
+        <div class="col-md-12">
+	        <video id="self" width="150" height="100" muted="muted" volume="0"></video>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button ng-click=videoCheckout()>x</button>
+        </div>
+      </div>
+
 		    <div class="questions_container">
-		      <button class="questions_button btn btn-primary" ng-show="!showQuestions" 
-		        ng-click="showQuestions = !showQuestions">Show Questions</button> 
+		      <button class="questions_button btn btn-primary" ng-show="!showQuestions"
+		        ng-click="showQuestions = !showQuestions">Show Questions</button>
 		      <button class="hide_questions_button btn btn-primary" ng-show="showQuestions"
 		        ng-click="showQuestions = !showQuestions">Hide</button>
 		      <button class="hide_questions_button btn btn-primary" ng-show="showQuestions"
 		        ng-click="shuffleQuestions()">Random</button>
-		      <ul class="list-group questions" ng-show="showQuestions">	
+		      <ul class="list-group questions" ng-show="showQuestions">
 		        <li class="list-group-item" ng-repeat="question in data.questions">{{question}}</li>
 		      </ul>
 		    </div>

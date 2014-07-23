@@ -4,13 +4,14 @@ angular.module('ramblApp.lobby', [])
   function ($scope, $window, $location, $interval, EasyRTC, Auth) {
     $scope.data = {};
     $scope.data.userName = $window.localStorage.getItem('ramblUsername');
+    console.log($window.localStorage);
 
     // sets currentRoom then navigates to the room route
     $scope.setCurrentRoomAndNavigate = function (roomName) {
       EasyRTC.setCurrentRoom(roomName);
       $location.path('/room/' + roomName);
     };
-    
+
     $scope.signout = Auth.signout;
 
     // check if there is a current room and if so leave it and hang up all calls
