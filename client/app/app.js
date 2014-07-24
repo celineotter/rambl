@@ -44,7 +44,7 @@ angular.module('ramblApp',
       });
 
       if(window.history && window.history.pushState) {
-        $locationProvider.html5Mode(true);
+        // $locationProvider.html5Mode(true);
       }
       $httpProvider.interceptors.push('AttachTokens');
       // $locationProvider.html5Mode(true);
