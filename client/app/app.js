@@ -1,10 +1,12 @@
 angular.module('ramblApp',
   ['ngRoute',
-  // pass in new files:
+   'ramblApp.app',
    'ramblApp.authServices',
    'ramblApp.easyRTCServices',
    'ramblApp.interviewServices',
+   'ramblApp.navbar',
    'ramblApp.home',
+   'ramblApp.login',
    'ramblApp.signup',
    'ramblApp.about',
    'ramblApp.lobby',
@@ -16,6 +18,10 @@ angular.module('ramblApp',
       .when('/', {
         templateUrl: 'app/home/home.html',
         controller: 'homeController'
+      })
+      .when('/login', {
+        templateUrl: 'app/login/login.html',
+        controller: 'loginController'
       })
       .when('/signup', {
         templateUrl: 'app/signup/signup.html',
@@ -63,13 +69,14 @@ angular.module('ramblApp',
           next.$$route &&
           next.$$route.controller &&
           (next.$$route.controller !== 'homeController' &&
+            next.$$route.controller !== 'loginController' &&
             next.$$route.controller !== 'signupController' &&
             next.$$route.controller !== 'aboutController')) {
         Auth.isAuth()
           .then(function() {
           })
           .catch(function() {
-            $location.path('/');
+            $location.path('/login');
           });
       }
     });
