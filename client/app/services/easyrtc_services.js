@@ -5,8 +5,8 @@ angular.module('ramblApp.easyRTCServices', [])
     /* gets set after a room is clicked in the lobby, gets passed to joinRoom */
     var currentRoom = null;
 
-    // gets set to true after connecting in lobby, prevents repeated attempts to connect to easyrtc
-    // after connection has been established.
+    /* gets set to true after connecting in lobby, prevents repeated attempts to connect to easyrtc
+    after connection has been established. */
     var connectionEstablished = false;
 
     var getConnectionStatus = function () {

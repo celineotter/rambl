@@ -3,8 +3,8 @@ angular.module('ramblApp.lobby', [])
 .controller('lobbyController', ['$scope', '$window', '$location', '$interval', 'EasyRTC', 'Auth',
   function ($scope, $window, $location, $interval, EasyRTC, Auth) {
     $scope.data = {};
+    // get username -> for navbar.
     $scope.data.userName = $window.localStorage.getItem('ramblUsername');
-    console.log($window.localStorage);
 
     // sets currentRoom then navigates to the room route
     $scope.setCurrentRoomAndNavigate = function (roomName) {
@@ -20,8 +20,10 @@ angular.module('ramblApp.lobby', [])
     }
 
     // connect to server then get rooms with asynchronous callback and apply them to scope
+    // ???
     EasyRTC.connect(function () {
   	  EasyRTC.getRooms(function (rooms) {
+        console.log('connect + getroom');
   	  	$scope.$apply(function () {
     	    $scope.data.rooms = rooms;
   	  	});
@@ -31,6 +33,7 @@ angular.module('ramblApp.lobby', [])
     // this is so that rooms are displayed instantly when going from room to lobby
     EasyRTC.getRooms(function (rooms) {
   	  	$scope.$apply(function () {
+          console.log('getroom apply');
   		    $scope.data.rooms = rooms;
   	  	});
   	});
